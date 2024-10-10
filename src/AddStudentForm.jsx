@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './AddStudentForm.css'; // Import the CSS file for styling
 
-const AddStudentForm = ({ addStudent }) => {
+const AddStudentForm = ({ fetchStudents = () => {} }) => {
+  // Default function
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [contacts, setContacts] = useState('');
@@ -15,10 +17,15 @@ const AddStudentForm = ({ addStudent }) => {
 
   // Fetch programs from backend when component loads
   useEffect(() => {
-    fetch('http://localhost:3000/programs')
-      .then((res) => res.json())
-      .then((data) => setPrograms(data))
-      .catch((err) => setError('Error fetching programs.'));
+    const fetchPrograms = async () => {
+      try {
+        const res = await axios.get('http://localhost:3000/programs');
+        setPrograms(res.data);
+      } catch (err) {
+        setError('Error fetching programs.');
+      }
+    };
+    fetchPrograms();
   }, []);
 
   // Handle program selection change
@@ -34,6 +41,17 @@ const AddStudentForm = ({ addStudent }) => {
       setTuitionFee(selectedProgram.tuition_fee);
     } else {
       setTuitionFee(''); // Reset tuition fee if no program is selected
+    }
+  };
+
+  const addStudent = async (student) => {
+    try {
+      await axios.post('http://localhost:3000/api/students', student);
+      fetchStudents(); // Call the function to refresh the student list
+      setMessage('Student added successfully!');
+    } catch (error) {
+      console.error('Error adding student:', error);
+      setError('Error adding student. Please try again.');
     }
   };
 
@@ -58,11 +76,8 @@ const AddStudentForm = ({ addStudent }) => {
       program_id: programId, // Send the selected program ID
     };
 
-    // Call the parent function to add the student
+    // Call the function to add the student
     addStudent(studentData);
-
-    // Set success message
-    setMessage('Student added successfully!');
 
     // Reset form fields
     setFirstname('');

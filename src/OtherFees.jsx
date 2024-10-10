@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './StudentTable.css'; // Import CSS file
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons'; // Import the search icon
+import PaymentModal from './PaymentModal'; // Import your PaymentModal component
 
-const StudentTable = ({ students, updateStatus }) => {
+const OtherFees = ({ students }) => {
   const [editingId, setEditingId] = useState(null); // Track which student is being edited
   const [selectedStatus, setSelectedStatus] = useState('');
   const [searchTerm, setSearchTerm] = useState(''); // State for search term
+  const [selectedStudent, setSelectedStudent] = useState(null); // State for the selected student
+  const [isModalOpen, setIsModalOpen] = useState(false); // State for modal visibility
 
   // Filter students based on search term
   const filteredStudents = students.filter(
@@ -17,14 +20,14 @@ const StudentTable = ({ students, updateStatus }) => {
       student.contacts.includes(searchTerm)
   );
 
-  const handleStatusChange = (id, newStatus) => {
-    setEditingId(id); // Show dropdown for selected student
-    setSelectedStatus(newStatus); // Set selected status
+  const handleStudentClick = (student) => {
+    setSelectedStudent(student);
+    setIsModalOpen(true); // Open the modal
   };
 
-  const handleStatusUpdate = (id) => {
-    updateStatus(id, selectedStatus); // Update status in backend
-    setEditingId(null); // Close dropdown after update
+  const handleCloseModal = () => {
+    setIsModalOpen(false); // Close the modal
+    setSelectedStudent(null); // Reset selected student
   };
 
   return (
@@ -44,18 +47,17 @@ const StudentTable = ({ students, updateStatus }) => {
       <table className='styled-table'>
         <thead>
           <tr>
-            <th>Name</th>
+            <th>Name</th> {/* Combined Name column */}
             <th>Contacts</th>
             <th>Program</th>
             <th>Tuition</th>
             <th>Balance</th>
             <th>Status</th>
-            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {filteredStudents.map((student) => (
-            <tr key={student.id}>
+            <tr key={student.id} onClick={() => handleStudentClick(student)}>
               <td>{`${student.firstname} ${student.lastname}`}</td>
               <td>{student.contacts}</td>
               <td>{student.program_name}</td>
@@ -83,31 +85,17 @@ const StudentTable = ({ students, updateStatus }) => {
                   </span>
                 )}
               </td>
-              <td>
-                {editingId === student.id ? (
-                  <button
-                    className='btn save-btn'
-                    onClick={() => handleStatusUpdate(student.id)}
-                  >
-                    Save
-                  </button>
-                ) : (
-                  <button
-                    className='btn edit-btn'
-                    onClick={() =>
-                      handleStatusChange(student.id, student.status)
-                    }
-                  >
-                    Edit
-                  </button>
-                )}
-              </td>
             </tr>
           ))}
         </tbody>
       </table>
+
+      {/* Payment Modal */}
+      {isModalOpen && (
+        <PaymentModal student={selectedStudent} onClose={handleCloseModal} />
+      )}
     </div>
   );
 };
 
-export default StudentTable;
+export default OtherFees;

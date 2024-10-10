@@ -12,7 +12,7 @@ const CompletedStudents = () => {
 
   // Fetch students who completed
   const fetchCompletedStudents = async () => {
-    const sql = 'http://localhost:3000/students/completed'; // Your API endpoint
+    const sql = 'http://localhost:3000/api/students/completed'; // Your API endpoint
     try {
       const response = await axios.get(sql);
       setStudents(response.data); // Set students in state
@@ -67,30 +67,34 @@ const CompletedStudents = () => {
           <FontAwesomeIcon icon={faSearch} />
         </span>
       </div>
-      <table className='styled-table'>
-        <thead>
-          <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Contacts</th>
-            <th>Program</th>
-            <th>Tuition</th>
-            <th>Balance</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredStudents.map((student) => (
-            <tr key={student.id}>
-              <td>{student.firstname}</td>
-              <td>{student.lastname}</td>
-              <td>{student.contacts}</td>
-              <td>{student.program_name}</td>
-              <td>{student.tuition_fee}</td>
-              <td>{student.balance}</td>
+      {filteredStudents.length > 0 ? (
+        <table className='styled-table'>
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Contacts</th>
+              <th>Program</th>
+              <th>Tuition</th>
+              <th>Balance</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {filteredStudents.map((student) => (
+              <tr key={student.id}>
+                <td>{student.firstname}</td>
+                <td>{student.lastname}</td>
+                <td>{student.contacts}</td>
+                <td>{student.program_name}</td>
+                <td>{student.tuition_fee}</td>
+                <td>{student.balance}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <p>No students have completed their program yet.</p> // Message when no students completed
+      )}
     </div>
   );
 };

@@ -66,8 +66,7 @@ const StudentsOnLoan = ({ students, loading, error }) => {
             ))
           ) : (
             <tr>
-              <td colSpan='7'>No students on loan found</td>{' '}
-              {/* Make sure colSpan matches the number of columns */}
+              <td colSpan='7'>No students on loan found</td>
             </tr>
           )}
         </tbody>

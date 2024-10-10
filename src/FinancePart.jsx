@@ -20,7 +20,7 @@ const FinancePart = ({ students, updateStatus }) => {
   // Fetch the updated student data without blocking the UI
   const fetchStudentData = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/students');
+      const response = await axios.get('http://localhost:3000/api/students');
       setStudentData(response.data); // Update student data in the background
     } catch (error) {
       console.error('Error fetching student data:', error);
@@ -41,14 +41,19 @@ const FinancePart = ({ students, updateStatus }) => {
   }, []);
 
   // Filter students based on search term
-  const filteredStudents = studentData.filter(
-    (student) =>
-      `${student.first_name} ${student.last_name}`
-
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase()) ||
-      student.contacts.includes(searchTerm)
-  );
+  const filteredStudents = studentData.filter((student) => {
+    const fullName = `${student.firstname} ${student.lastname}`.toLowerCase();
+    const searchLower = searchTerm.toLowerCase();
+    return (
+      fullName.includes(searchLower) ||
+      (typeof student.contacts === 'string' &&
+        student.contacts.toLowerCase().includes(searchLower)) || // Assuming contacts is a string
+      (Array.isArray(student.contacts) &&
+        student.contacts.some((contact) =>
+          contact.toLowerCase().includes(searchLower)
+        )) // If contacts is an array
+    );
+  });
 
   // Function to open modal and set selected student
   const handleStudentClick = (student) => {

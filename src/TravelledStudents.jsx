@@ -12,14 +12,14 @@ const TravelledStudents = () => {
 
   // Fetch students who travelled
   const fetchTravelledStudents = async () => {
-    const sql = 'http://localhost:3000/students/travelled'; // Your API endpoint
+    const sql = 'http://localhost:3000/api/students/travelled'; // Your API endpoint
     try {
       const response = await axios.get(sql);
       setStudents(response.data); // Set students in state
-      setLoading(false); // Update loading state
     } catch (err) {
       setError('Error fetching students who travelled'); // Handle error
-      setLoading(false); // Update loading state
+    } finally {
+      setLoading(false); // Update loading state regardless of success or failure
     }
   };
 
@@ -71,10 +71,10 @@ const TravelledStudents = () => {
           <tr>
             <th>Name</th>
             <th>Contacts</th>
-            <th>Status</th> {/* Added Status Column */}
-            <th>Program</th> {/* Program column */}
-            <th>Tuition</th> {/* Tuition Column */}
-            <th>Balance</th> {/* Balance Column */}
+            <th>Status</th>
+            <th>Program</th>
+            <th>Tuition</th>
+            <th>Balance</th>
           </tr>
         </thead>
         <tbody>
@@ -83,16 +83,15 @@ const TravelledStudents = () => {
               <tr key={student.id}>
                 <td>{`${student.firstname} ${student.lastname}`}</td>
                 <td>{student.contacts}</td>
-                <td>{student.status}</td> {/* Display Status */}
-                <td>{student.program_name}</td> {/* Display Program Name */}
-                <td>{student.tuition_fee}</td> {/* Display Tuition Fee */}
-                <td>{student.balance}</td> {/* Display Balance */}
+                <td>{student.status}</td>
+                <td>{student.program_name}</td>
+                <td>{student.tuition_fee}</td>
+                <td>{student.balance}</td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan='6'>No travelled students found</td>{' '}
-              {/* Adjusted colspan */}
+              <td colSpan='6'>No travelled students found</td>
             </tr>
           )}
         </tbody>

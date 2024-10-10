@@ -12,13 +12,13 @@ const NotCompletedStudents = () => {
 
   // Fetch students who have not completed
   const fetchNotCompletedStudents = async () => {
-    const sql = 'http://localhost:3000/students/notcompleted'; // Your API endpoint
+    const sql = 'http://localhost:3000/api/students/notcompleted'; // Your API endpoint
     try {
       const response = await axios.get(sql);
       setStudents(response.data); // Set students in state
-      setLoading(false); // Update loading state
     } catch (err) {
       setError('Error fetching students who have not completed'); // Handle error
+    } finally {
       setLoading(false); // Update loading state
     }
   };
@@ -72,22 +72,28 @@ const NotCompletedStudents = () => {
             <th>First Name</th>
             <th>Last Name</th>
             <th>Contacts</th>
-            <th>Program</th> {/* Program column moved up */}
+            <th>Program</th> {/* Program column */}
             <th>Tuition</th> {/* New column for Tuition */}
             <th>Balance</th> {/* New column for Balance */}
           </tr>
         </thead>
         <tbody>
-          {filteredStudents.map((student) => (
-            <tr key={student.id}>
-              <td>{student.firstname}</td>
-              <td>{student.lastname}</td>
-              <td>{student.contacts}</td>
-              <td>{student.program_name}</td> {/* Display Program Name */}
-              <td>{student.tuition_fee}</td> {/* Display Tuition Fee */}
-              <td>{student.balance}</td> {/* Display Balance */}
+          {filteredStudents.length > 0 ? (
+            filteredStudents.map((student) => (
+              <tr key={student.id}>
+                <td>{student.firstname}</td>
+                <td>{student.lastname}</td>
+                <td>{student.contacts}</td>
+                <td>{student.program_name}</td> {/* Display Program Name */}
+                <td>{student.tuition_fee}</td> {/* Display Tuition Fee */}
+                <td>{student.balance}</td> {/* Display Balance */}
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan='6'>No students found who have not completed.</td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
     </div>
