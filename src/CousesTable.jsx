@@ -10,7 +10,7 @@ const CoursesTable = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/programs');
+        const response = await axios.get(`${process.env.API_URL}/programs`);
         setPrograms(response.data);
         setLoading(false);
       } catch (err) {

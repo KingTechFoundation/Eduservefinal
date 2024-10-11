@@ -18,7 +18,8 @@ const AddFeeForm = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:3000/api/fees',
+        `${process.env.API_URL}/api/fees`,
+
         feeData
       );
 

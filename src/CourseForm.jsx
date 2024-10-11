@@ -22,7 +22,7 @@ const CourseForm = () => {
   const postCourse = async (courseData) => {
     try {
       const response = await axios.post(
-        'http://localhost:3000/courses',
+        `${process.env.API_URL}/courses`,
         courseData
       );
       return response.data;
@@ -44,13 +44,13 @@ const CourseForm = () => {
 
     try {
       await postCourse(courseData);
-      setMessage('Course added successfully!');
+      setMessage('Program added successfully!');
       setProgramName(''); // Reset form fields
       setTuitionFee('');
 
       setErrors({});
     } catch (error) {
-      setMessage(error.message || 'Failed to add course.');
+      setMessage(error.message || 'Failed to add program.');
     }
   };
 

@@ -12,7 +12,7 @@ const TravelledStudents = () => {
 
   // Fetch students who travelled
   const fetchTravelledStudents = async () => {
-    const sql = 'http://localhost:3000/api/students/travelled'; // Your API endpoint
+    const sql = `${process.env.API_URL}/api/students/travelled`; // Your API endpoint
     try {
       const response = await axios.get(sql);
       setStudents(response.data); // Set students in state

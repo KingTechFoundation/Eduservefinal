@@ -41,7 +41,7 @@ const Dashboard = () => {
 
   const fetchStudents = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/students');
+      const response = await axios.get(`${process.env.API_URL}/api/students`);
       setStudents(response.data);
       setLoading(false);
     } catch (error) {
@@ -53,7 +53,7 @@ const Dashboard = () => {
 
   const fetchFees = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/fees');
+      const response = await axios.get(`${process.env.API_URL}/api/fees`);
       setFees(response.data);
     } catch (error) {
       console.error('Error fetching fees data:', error);
@@ -73,12 +73,21 @@ const Dashboard = () => {
 
   const updateStatus = async (id, status) => {
     try {
-      await axios.put(`http://localhost:3000/api/students/${id}/status`, {
+      await axios.put(`${process.env.API_URL}/api/students/${id}/status`, {
         status,
       });
       fetchStudents(); // Refresh the students list after updating
     } catch (error) {
       console.error('Error updating student status:', error);
+    }
+  };
+
+  const addNewStudent = async (studentData) => {
+    try {
+      await axios.post(`${process.env.API_URL}/api/students`, studentData);
+      fetchStudents(); // Re-fetch the students list immediately after adding
+    } catch (error) {
+      console.error('Error adding new student:', error);
     }
   };
 
@@ -91,7 +100,9 @@ const Dashboard = () => {
       />
 
       <div className='content'>
-        {activeComponent === 'addStudent' && <AddStudentForm />}
+        {activeComponent === 'addStudent' && (
+          <AddStudentForm addNewStudent={addNewStudent} />
+        )}
         {activeComponent === 'studentsOnLoan' && (
           <StudentsOnLoan students={students} />
         )}

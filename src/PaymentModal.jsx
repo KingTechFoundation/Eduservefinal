@@ -17,7 +17,7 @@ const PaymentModal = ({ student, onClose }) => {
   useEffect(() => {
     const fetchFees = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/fees');
+        const response = await axios.get(`${process.env.API_URL}/api/fees`);
         setFees(response.data);
       } catch (error) {
         console.error('Error fetching fees:', error);
@@ -31,7 +31,7 @@ const PaymentModal = ({ student, onClose }) => {
   const fetchPaymentHistory = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/students/${student.id}/paymentz`
+        `${process.env.API_URL}/students/${student.id}/paymentz`
       ); // Update the endpoint to 'paymentz'
       setPaymentHistory(response.data);
     } catch (error) {
@@ -52,7 +52,7 @@ const PaymentModal = ({ student, onClose }) => {
 
     try {
       await axios.post(
-        `http://localhost:3000/students/${student.id}/paymentz`,
+        `${process.env.API_URL}/students/${student.id}/paymentz`,
         paymentData
       );
       setShowSuccessNotification(true); // Show success notification

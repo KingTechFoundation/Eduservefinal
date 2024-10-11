@@ -89,7 +89,6 @@ input[type='password'] {
 
 .radio-option input[type='radio'] {
   margin-right: 10px;
-  transform: scale(1.5); /* Make the radio buttons larger */
 }
 
 .radio-option label {

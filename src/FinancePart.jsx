@@ -20,7 +20,7 @@ const FinancePart = ({ students, updateStatus }) => {
   // Fetch the updated student data without blocking the UI
   const fetchStudentData = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/students');
+      const response = await axios.get(`${process.env.API_URL}/api/students`);
       setStudentData(response.data); // Update student data in the background
     } catch (error) {
       console.error('Error fetching student data:', error);

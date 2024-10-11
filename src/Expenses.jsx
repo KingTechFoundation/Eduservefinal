@@ -62,7 +62,7 @@ const Expenses = () => {
     }
 
     try {
-      await axios.post('http://localhost:3000/expenses', {
+      await axios.post(`${process.env.API_URL}/expenses`, {
         person_name: personName,
         amount: parseFloat(amount),
         expense_date: expenseDate,

@@ -12,7 +12,7 @@ const NotCompletedStudents = () => {
 
   // Fetch students who have not completed
   const fetchNotCompletedStudents = async () => {
-    const sql = 'http://localhost:3000/api/students/notcompleted'; // Your API endpoint
+    const sql = `${process.env.API_URL}/api/students/notcompleted`; // Your API endpoint
     try {
       const response = await axios.get(sql);
       setStudents(response.data); // Set students in state

@@ -31,7 +31,7 @@ const PaymentForm = ({ studentId, studentName, balance, closeModal }) => {
       return;
     }
     try {
-      await axios.post('http://localhost:3000/api/payments', {
+      await axios.post(`${process.env.API_URL}/api/payments`, {
         student_id: studentId,
         amount_paid: amountPaid,
         payment_date: paymentDate,
@@ -65,7 +65,7 @@ const PaymentForm = ({ studentId, studentName, balance, closeModal }) => {
   const handleViewStatement = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/students/${studentId}/payments`
+        `${process.env.API_URL}/payments/${studentId}`
       );
 
       const payments = response.data; // Array of payment records

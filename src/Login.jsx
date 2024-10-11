@@ -19,7 +19,7 @@ const Login = () => {
     setLoading(true); // Set loading to true
 
     try {
-      const response = await fetch('http://localhost:3000/api/login', {
+      const response = await fetch(`${process.env.API_URL}/api/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user_id: parseInt(userId), password, role }), // Send role to backend

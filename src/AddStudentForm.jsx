@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './AddStudentForm.css'; // Import the CSS file for styling
 
-const AddStudentForm = ({ fetchStudents = () => {} }) => {
-  // Default function
+const AddStudentForm = ({ addNewStudent }) => {
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [contacts, setContacts] = useState('');
@@ -19,7 +18,7 @@ const AddStudentForm = ({ fetchStudents = () => {} }) => {
   useEffect(() => {
     const fetchPrograms = async () => {
       try {
-        const res = await axios.get('http://localhost:3000/programs');
+        const res = await axios.get(`${process.env.API_URL}/programs`);
         setPrograms(res.data);
       } catch (err) {
         setError('Error fetching programs.');
@@ -41,17 +40,6 @@ const AddStudentForm = ({ fetchStudents = () => {} }) => {
       setTuitionFee(selectedProgram.tuition_fee);
     } else {
       setTuitionFee(''); // Reset tuition fee if no program is selected
-    }
-  };
-
-  const addStudent = async (student) => {
-    try {
-      await axios.post('http://localhost:3000/api/students', student);
-      fetchStudents(); // Call the function to refresh the student list
-      setMessage('Student added successfully!');
-    } catch (error) {
-      console.error('Error adding student:', error);
-      setError('Error adding student. Please try again.');
     }
   };
 
@@ -77,7 +65,7 @@ const AddStudentForm = ({ fetchStudents = () => {} }) => {
     };
 
     // Call the function to add the student
-    addStudent(studentData);
+    addNewStudent(studentData);
 
     // Reset form fields
     setFirstname('');
@@ -87,6 +75,7 @@ const AddStudentForm = ({ fetchStudents = () => {} }) => {
     setIsOnLoan(false);
     setProgramId('');
     setTuitionFee('');
+    setMessage('Student added successfully!');
   };
 
   return (
