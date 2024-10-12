@@ -22,7 +22,7 @@ const Expenses = () => {
   // Fetch expenses from the backend
   const fetchExpenses = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/expenses', {
+      const response = await axios.get(`${process.env.API_URL}/expenses`, {
         params: {
           start_date: startDate,
           end_date: endDate,
