@@ -1,23 +1,37 @@
+/* Dashboard */
 .dashboard {
   display: flex;
-}
-
-.dashboard-content {
-  flex-grow: 1;
-  padding: 20px;
-  background-color: #f5f5f5;
-}
-
-.dark-mode .dashboard-content {
-  background-color: #2a2b36;
-  color: white;
-}
-
-.dashboard-container {
-  display: flex; /* Flexbox for horizontal alignment */
+  margin-left: 200px; /* Space for the sidebar width */
   height: 100vh; /* Full height */
 }
 
+/* Dashboard content */
+.dashboard-content {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #f5f5f5; /* Light background for the content area */
+  overflow-y: auto; /* Allows scrolling if content overflows */
+}
+
+.dark-mode .dashboard-content {
+  background-color: #2a2b36; /* Dark mode background */
+  color: white;
+}
+
+/* Dashboard container */
+.dashboard-container {
+  display: flex; /* Flexbox for horizontal alignment */
+  flex-grow: 1; /* Makes sure the container fills the available space */
+  height: 100vh; /* Full height */
+}
+
+/* Content */
+.content {
+  flex-grow: 1; /* Takes up remaining space */
+  padding: 10px;
+  background-color: #ecf0f1; /* Background for the content area */
+  overflow-y: auto;
+}
 .sidebar {
   width: 200px; /* Fixed width for the sidebar */
   background-color: #2c3e50; /* Sidebar background color */
@@ -29,11 +43,4 @@
   height: 100vh; /* Full height of the viewport */
   overflow-y: auto; /* Allows scrolling within the sidebar if content overflows */
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow for depth */
-}
-
-.content {
-  flex-grow: 1; /* Takes up remaining space */
-  padding: 10px;
-  background-color: #ecf0f1; /* Background for the content area */
-  overflow-y: auto; /* Allows scrolling if content overflows */
 }
