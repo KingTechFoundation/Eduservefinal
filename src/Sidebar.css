@@ -1,14 +1,5 @@
 /* General Styles */
-.sidebar {
-  width: 200px; /* Reduced the width from 250px to 200px */
-  height: 100vh;
-  background-color: #fff;
-  color: #333;
-  transition: width 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  position: relative; /* Ensure positioning is relative for child elements */
-}
+
 
 .sidebar.dark {
   background-color: #1c1e29;
