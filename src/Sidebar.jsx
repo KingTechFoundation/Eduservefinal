@@ -91,6 +91,12 @@ const Sidebar = ({ handleLogout, setActiveComponent, role }) => {
         icon: <FaRegChartBar />,
         component: 'travelledStudents',
       },
+
+      {
+        name: 'Manage Expenses',
+        icon: <FaRegClipboard />,
+        component: 'expenses',
+      },
     ],
   };
 

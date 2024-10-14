@@ -120,7 +120,7 @@ const Expenses = () => {
       head: [['Person Name', 'Amount', 'Expense Date', 'Description']],
       body: expenses.map((expense) => [
         expense.person_name,
-        `$${expense.amount.toFixed(2)}`,
+        `shs ${expense.amount.toFixed(2)}`,
         new Date(expense.expense_date).toLocaleDateString(),
         expense.description,
       ]),
@@ -129,7 +129,7 @@ const Expenses = () => {
 
     // Total expenses at the bottom
     doc.text(
-      `Total Expenses: $${total.toFixed(2)}`,
+      `Total Expenses: shs ${total.toFixed(2)}`,
       14,
       doc.autoTable.previous.finalY + 10
     );
