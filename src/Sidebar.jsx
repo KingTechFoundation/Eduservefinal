@@ -33,35 +33,35 @@ const Sidebar = ({ handleLogout, setActiveComponent, role }) => {
       { name: 'View Programs', icon: <FaEye />, component: 'coursesTable' },
       { name: 'Add Student', icon: <FaUser />, component: 'addStudent' },
       { name: 'View Students', icon: <FaEye />, component: 'StudentsTable' },
-      { name: 'Add Fee Form', icon: <FaPlus />, component: 'addFeeForm' },
+      { name: 'Add Fee', icon: <FaPlus />, component: 'addFeeForm' },
 
       {
-        name: 'On Loan Students',
+        name: 'On Loan',
         icon: <FaRegClipboard />,
         component: 'studentsOnLoan',
       },
       {
-        name: 'Not Completed',
+        name: 'Pending',
         icon: <FaRegChartBar />,
         component: 'notCompleted',
       },
 
       {
-        name: 'Completed Students',
+        name: 'Alumni',
         icon: <FaUser />,
         component: 'completedStudents',
       },
       {
-        name: 'Travelled Students',
+        name: 'Travelled',
         icon: <FaRegChartBar />,
         component: 'travelledStudents',
       },
     ],
     finance: [
-      { name: 'Manage Tuition', icon: <FaHome />, component: 'financePart' },
+      { name: 'Tuition', icon: <FaHome />, component: 'financePart' },
       { name: 'Other Fees', icon: <FaRegChartBar />, component: 'otherFees' },
       {
-        name: 'Manage Expenses',
+        name: 'Expenses',
         icon: <FaRegClipboard />,
         component: 'expenses',
       },
@@ -71,29 +71,29 @@ const Sidebar = ({ handleLogout, setActiveComponent, role }) => {
       { name: 'View Students', icon: <FaEye />, component: 'StudentsTable' },
       { name: 'View Programs', icon: <FaEye />, component: 'coursesTable' },
       {
-        name: 'On Loan Students',
+        name: 'On Loan ',
         icon: <FaRegClipboard />,
         component: 'studentsOnLoan',
       },
       {
-        name: 'Not Completed',
+        name: 'Pending',
         icon: <FaRegChartBar />,
         component: 'notCompleted',
       },
 
       {
-        name: 'Completed Students',
+        name: 'Alumini',
         icon: <FaUser />,
         component: 'completedStudents',
       },
       {
-        name: 'Travelled Students',
+        name: 'Travelled',
         icon: <FaRegChartBar />,
         component: 'travelledStudents',
       },
 
       {
-        name: 'Manage Expenses',
+        name: 'Expenses',
         icon: <FaRegClipboard />,
         component: 'expenses',
       },
