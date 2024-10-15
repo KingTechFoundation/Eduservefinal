@@ -18,7 +18,7 @@
   display: flex; /* Flexbox for horizontal alignment */
   flex-grow: 1; /* Ensures the container fills the available space */
   height: 100vh; /* Full height */
-  margin-left: 180px; /* Adjusted to increase the width of the container */
+  margin-left: 150px; /* Adjusted to increase the width of the container */
   overflow-x: auto; /* Enables horizontal scrolling */
   white-space: nowrap; /* Prevents columns from wrapping */
 }
@@ -39,7 +39,7 @@
 /* Content */
 .content {
   flex-grow: 1; /* Takes up remaining space */
-  padding: 10px;
+  padding: 8px;
   background-color: #ecf0f1; /* Background for the content area */
   overflow-y: auto; /* Allows scrolling if content overflows */
 }

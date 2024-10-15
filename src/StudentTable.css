@@ -72,12 +72,6 @@ body {
   }
 }
 
-.table-container {
-  display: flex;
-  flex-direction: column; /* Stack elements vertically */
-  align-items: center; /* Center the contents */
-}
-
 @media (max-width: 768px) {
   .search-bar {
     font-size: 14px; /* Smaller font size for smaller screens */
@@ -86,14 +80,31 @@ body {
 }
 
 /* Table Container */
+
+/* Table Container */
 .table-container {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Center the contents */
   margin: 2rem auto;
   padding: 1rem;
-  max-width: 1000px;
+  max-width: 1000px; /* Maximum width for the container */
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  overflow-x: auto;
+  overflow-x: auto; /* Allows horizontal scrolling for small screens */
+}
+
+/* Apply horizontal scroll on small screens */
+@media (max-width: 768px) {
+  .dashboard-container {
+    overflow-x: auto; /* Enables horizontal scrolling */
+  }
+
+  .table-container {
+    width: 100%; /* Make the table container full width on small screens */
+    overflow-x: auto; /* Allows horizontal scrolling */
+  }
 }
 
 .loading-spinner {
@@ -259,4 +270,29 @@ body {
   .status-label {
     min-width: 100px; /* Adjust min-width for smaller devices */
   }
+}
+
+.scrollable-table {
+  width: 100%; /* Take full width of the container */
+  overflow-x: auto; /* Enables horizontal scrolling */
+  margin-top: 1rem; /* Space between the search bar and table */
+}
+
+/* Optional: Add styling for the search bar */
+.search-container {
+  display: flex; /* Align search bar and icon horizontally */
+  align-items: center; /* Center items vertically */
+  margin-bottom: 1rem; /* Space below the search bar */
+}
+
+.search-bar {
+  padding: 0.5rem; /* Padding for input field */
+  border: 1px solid #ccc; /* Border for input field */
+  border-radius: 5px; /* Rounded corners */
+  flex-grow: 1; /* Make the input field take remaining space */
+}
+
+.search-icon {
+  margin-left: 0.5rem; /* Space between input and icon */
+  cursor: pointer; /* Change cursor to pointer for the icon */
 }
